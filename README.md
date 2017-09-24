@@ -1,5 +1,19 @@
 # OpenStreetMap   Data   Case   Study 
 
+## Map area
+
+Ho Chi Minh City, Vietnam
+
+Soure of data: 
+
+https://www.openstreetmap.org/relation/1973756
+
+https://mapzen.com/data/metro-extracts/metro/ho-chi-minh-city_vietnam/
+
+According to Wikipedia, Ho Chi Minh City (commonly known as Saigon) is a city in southern Vietnam famous for the pivotal role it played in the Vietnam War. It's also known for its French colonial landmarks, including Notre-Dame Cathedral, made entirely of materials imported from France, and the 19th-century Central Post Office. Food stalls line the city’s streets, especially around bustling Bến Thành Market.
+
+This map is about my hometown, and I also speak Vietnamese, so I think it will be helpful for the analysis process, and I'd like to contribute to its improvement
+
 ## Problems   encountered   in   the   map
 Initially   I   downloaded   a   small   sample   of   the   Ho   Chi   Minh   City   area,   and   then   running   it   against   a provisional   data.py   file.   Later   on,   after   importing   the   data   into   SQL,   I   found   several   problems with   the   data.   Below   is   some   of   them.
 
