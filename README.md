@@ -41,23 +41,67 @@ This   section   contains   basic   statistics   about   the   dataset,   and   
 notebook   to   gather   them,   except   for   the   file   size   section.
 
 ### File size
-![alt text] (https://github.com/hanhbuical/datawrangling/blob/master/Screen%20Shot%202017-09-22%20at%2011.10.16%20PM.png)
+![alt text](https://github.com/hanhbuical/datawrangling/blob/master/Screen%20Shot%202017-09-22%20at%2011.10.16%20PM.png)
 
+### Number of nodes
+```python
+node = cur.execute('SELECT COUNT(*) FROM nodes')
+node.fetchone()[0]
+```
+404079
+
+### Number of ways
+```python
+ways = cur.execute('SELECT COUNT(*) FROM ways')
+ways.fetchone()[0]
+```
+47878
+
+### Number of unique users
+```python
+unique_user = cur.execute('SELECT COUNT(DISTINCT(sq.uid)) \
+            FROM (SELECT uid FROM nodes UNION ALL SELECT uid FROM ways) as sq')
+unique_user.fetchone()[0]
+```
+1596
+
+### Top 10 contributing users
+```python
+top_10_active = cur.execute('SELECT sq.user, COUNT(*) as num \
+            FROM  (SELECT user FROM nodes UNION ALL SELECT user FROM ways) as sq\
+            GROUP BY sq.user \
+            ORDER BY num DESC \
+            LIMIT 10')
+top_10_active.fetchall()
+```
+![alt text](https://github.com/hanhbuical/datawrangling/blob/master/Screen%20Shot%202017-09-23%20at%207.36.09%20PM.png)
+
+### Number of users appearing only once
+```python
+user_once_only = cur.execute('SELECT count(*)\
+            FROM (SELECT sq.user, COUNT(*) as num \
+            FROM  (SELECT user FROM nodes UNION ALL SELECT user FROM ways) as sq\
+            GROUP BY sq.user \
+            HAVING num = 1) as sq2')
+user_once_only.fetchone()[0]
+```
+713
+
+## Additional Idea
+What I have done above, by no mean, completely cleaned the dataset, but I have seen a lot of rooms to prevent some problems for the data. One of my suggestions is to set up a way for user to fill in phone number in a consistent way. The reason why I said this is because while doing my exploration on the whole dataset using SQL in Jupyter notebook, I’ve found an big of amount of dirty data in the phone numbers inputted by users.
 
 ```python
+phone=cur.execute('SELECT sq.value\
+            FROM (SELECT value FROM nodes_tags\
+            WHERE key="phone"\
+            UNION ALL\
+            SELECT value FROM ways_tags \
+            WHERE key="phone") as sq\
+            LIMIT 20')
+phone.fetchall()
 ```
+![alt text](https://github.com/hanhbuical/datawrangling/blob/master/Screen%20Shot%202017-09-23%20at%207.36.16%20PM.png)
 
-```python
-```
+Using my local knowledge of phone numbers, I know that the mixture of numbers above consists numbers of landline phones and cellphones. Also, there is an inconsistency between using and not using country code (+84).
 
-```python
-```
-
-```python
-```
-
-```python
-```
-
-```python
-```
+This is not a hard problem to solve at all if there is a way to help people to input their phone numbers in the same format, and in my opinion, openstreetmap can help users to create such a format. This format will ensure the consistency in phone number input. The possible problem here is that some user may not have English competency to understand the instruction to follow such a format. 
