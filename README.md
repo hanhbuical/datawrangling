@@ -38,5 +38,26 @@ After running this function, any k='name' that had a variation of "Hẻm" or "Đ
 
 ## Overview   of   the   data
 This   section   contains   basic   statistics   about   the   dataset,   and   I   used   SQL   queries   in   jupyter
-notebook   to   gather   them,   except   for   the   file   size   section.
+notebook   to   gather   them,   except   for   the   file   size   section.
 
+### File size
+![alt text] (https://github.com/hanhbuical/datawrangling/blob/master/Screen%20Shot%202017-09-22%20at%2011.10.16%20PM.png)
+
+
+```python
+```
+
+```python
+```
+
+```python
+```
+
+```python
+```
+
+```python
+```
+
+```python
+```
